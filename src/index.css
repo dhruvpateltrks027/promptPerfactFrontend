@@ -1,0 +1,385 @@
+@import "tailwindcss";
+
+@source "../src/**/*.{js,jsx,ts,tsx}";
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-family-inter: 'Inter', system-ui, sans-serif;
+  --font-family-outfit: 'Outfit', sans-serif;
+  --color-bg-body: #080810;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+  --color-violet-500: #8b5cf6;
+  --color-violet-400: #a78bfa;
+  --color-emerald-500: #10b981;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #05050a;
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Main Container with subtle mesh background */
+/* Main Container - Vanta.js provides background */
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+
+/* Animations */
+@keyframes border-glow-pulse {
+
+  0%,
+  100% {
+    border-color: rgba(6, 182, 212, 0.3);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.1), inset 0 0 10px rgba(6, 182, 212, 0.05);
+  }
+
+  50% {
+    border-color: rgba(6, 182, 212, 0.6);
+    box-shadow: 0 0 25px rgba(6, 182, 212, 0.25), inset 0 0 20px rgba(6, 182, 212, 0.1);
+  }
+}
+
+@keyframes wave-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* AI Badge */
+.badge-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: rgba(10, 10, 15, 0.6);
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  border-radius: 100px;
+  color: var(--color-cyan-400);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+/* GLOWING CARD BASE */
+.glow-card {
+  position: relative;
+  background: rgba(13, 13, 18, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Fallback/Base */
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  /* The pulsing glow is applied via animation class */
+}
+
+/* Animated Border Glow */
+.card-animated-border {
+  animation: border-glow-pulse 4s ease-in-out infinite;
+}
+
+/* Inner Container */
+.card-inner {
+  position: relative;
+  background: rgba(10, 10, 14, 0.8);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 20px;
+  min-height: 280px;
+  overflow: hidden;
+  /* For containing the background animation */
+}
+
+/* ===== REFINED SMOKE/WAVE ANIMATION ===== */
+.bg-wave-animation {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.bg-wave-animation::before,
+.bg-wave-animation::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 200%;
+  min-height: 200%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center,
+      rgba(139, 92, 246, 0.3) 0%,
+      rgba(6, 182, 212, 0.2) 25%,
+      rgba(124, 58, 237, 0.1) 50%,
+      transparent 70%);
+  filter: blur(60px);
+  animation: smoke-wave 12s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+}
+
+.bg-wave-animation::after {
+  background: radial-gradient(circle at center,
+      rgba(6, 182, 212, 0.25) 0%,
+      rgba(139, 92, 246, 0.2) 30%,
+      transparent 70%);
+  animation-duration: 18s;
+  animation-direction: reverse;
+  opacity: 0.7;
+}
+
+@keyframes smoke-wave {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+
+  33% {
+    transform: translate(-45%, -55%) rotate(10deg) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-55%, -45%) rotate(-5deg) scale(0.9);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes wave-pulse {
+  0% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* Animated accent line on the left of Input Card */
+.input-accent-line {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  bottom: 20px;
+  width: 3px;
+  background: linear-gradient(to bottom, transparent, rgba(6, 182, 212, 0.8), transparent);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+  border-radius: 0 4px 4px 0;
+  z-index: 10;
+}
+
+/* Textarea input */
+.prompt-input {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  z-index: 1;
+  /* Above background */
+}
+
+.prompt-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Output Text */
+.output-text {
+  color: #d1d5db;
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Card Label */
+.card-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #9ca3af;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Primary Button (Enhance) */
+.btn-primary-enhance {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #7c3aed 0%, #06b6d4 100%);
+  /* Stronger cyan end */
+  border-radius: 999px;
+  /* Pill shape */
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Subtle border for definition */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.5);
+  /* Stronger shadow */
+  z-index: 20;
+  /* Ensure high z-index */
+  background-size: 200% auto;
+}
+
+.btn-primary-enhance:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(124, 58, 237, 0.7);
+  background-position: right center;
+}
+
+
+.btn-primary-enhance:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Round Icon Buttons */
+.btn-icon-round {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-icon-round:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: white;
+}
+
+/* Output Action Buttons (Pill shape with border) */
+.btn-action-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #9ca3af;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-action-pill:hover {
+  border-color: var(--color-cyan-400);
+  color: var(--color-cyan-400);
+  background: rgba(34, 211, 238, 0.05);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+}
+
+/* Footer Links */
+.footer-link {
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-decoration: none;
+  margin: 0 12px;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+/* Animation Utilities */
+.animate-enter {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.stagger-1 {
+  animation-delay: 0.1s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
